@@ -60,8 +60,8 @@ Pages.transfersPending = async function(container) {
           <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border)">
             <h3 style="margin:0;font-size:0.95rem;color:#f59e0b">⏳ รอโอน (${allItems.length} รายการ)</h3>
           </div>
-          <div class="table-wrapper" style="overflow-y:auto">
-            <table class="data-table" style="font-size:0.72rem">
+          <div class="table-wrapper" style="overflow-x:auto;overflow-y:auto">
+            <table class="data-table" style="font-size:0.72rem;white-space:nowrap">
               <thead>
                 <tr>
                   <th style="width:36px"><input type="checkbox" id="cbTransferAll" style="width:16px;height:16px;cursor:pointer"></th>
@@ -201,8 +201,8 @@ Pages.transfersDone = async function(container) {
           <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border)">
             <h3 style="margin:0;font-size:0.95rem;color:#10b981">✅ โอนแล้ว (${filtered.length} รายการ)</h3>
           </div>
-          <div class="table-wrapper" style="overflow-y:auto">
-            <table class="data-table" style="font-size:0.72rem">
+          <div class="table-wrapper" style="overflow-x:auto;overflow-y:auto">
+            <table class="data-table" style="font-size:0.72rem;white-space:nowrap">
               <thead>
                 <tr>
                   <th>#</th>
