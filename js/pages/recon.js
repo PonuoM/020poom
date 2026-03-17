@@ -343,7 +343,7 @@ Pages._reconRenderItemsTable = function(area, container) {
 
   area.innerHTML = `
     <div class="card">
-      <div class="table-wrap" style="overflow-x:auto"><table class="data-table">
+      <div class="table-wrap compact-scroll" style="overflow-x:auto"><table class="data-table compact-table">
         <thead><tr><th>#</th><th>เลขเอกสาร</th><th>ใบรับคืน</th><th>สาขา</th><th>ประเภท</th><th>รหัสสินค้า</th><th>ชื่อสินค้า</th><th>Class</th><th>SN</th><th>จำนวน</th><th>คลังปลายทาง</th><th>สาเหตุ</th><th>ผู้ปรับ</th><th>สถานะ</th><th>โอน</th></tr></thead>
         <tbody>${pageItems.length===0
           ? '<tr><td colspan="15" class="text-center" style="padding:40px;color:var(--text-muted)">'+(hasFilter?'ไม่พบรายการตามตัวกรอง':'ยังไม่มีรายการ')+'</td></tr>'

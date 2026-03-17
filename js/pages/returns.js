@@ -503,7 +503,7 @@ Pages._retRenderItemsTable = function(area, container) {
 
   area.innerHTML = `
     <div class="card">
-      <div class="table-wrap" style="overflow-x:auto"><table class="data-table">
+      <div class="table-wrap compact-scroll" style="overflow-x:auto"><table class="data-table compact-table">
         <thead><tr>
           <th>#</th><th>ใบรับคืน</th><th>วันที่</th><th>สาขา</th><th>ประเภท</th>
           <th>รหัสสินค้า</th><th>ชื่อสินค้า</th><th>Class</th><th>SN</th><th>จำนวน</th>
