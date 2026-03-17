@@ -190,7 +190,7 @@ Pages._renderProducts = function(container) {
   // ══════════════════════════════════════════
   //  PRODUCT TYPE MAP & IMPORT
   // ══════════════════════════════════════════
-  _productTypeMap: {
+Pages._productTypeMap = {
   '00': 'GLEM',
   '01': 'Washing Machine',
   '02': 'Vacuum Cleaner',
@@ -466,6 +466,4 @@ Pages.showProductImport = function() {
       btn.textContent = 'นำเข้าทั้งหมด';
     }
   });
-};
-  // ── Settings (ตั้งค่า) ───────────────────────
-Pages._settingsTab = 'warehouses';
+};

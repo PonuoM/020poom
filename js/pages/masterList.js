@@ -338,7 +338,4 @@ Pages._masterReconRow = function(r, i, warehouses) {
     <td class="ml-td-wrap"><input class="ml-inline-input" data-recon-id="${r.recon_id}" data-field="cause_text" value="${App.escapeHTML(r.cause_text || '')}" placeholder="—"${disabledAttr}></td>
     <td class="ml-td-wrap"><input class="ml-inline-input" data-recon-id="${r.recon_id}" data-field="inspector_name" value="${App.escapeHTML(r.recon_inspector || '')}" placeholder="—"${disabledAttr}></td>
   </tr>`;
-  }
 };
-
-// (Auth.init() handles startup via DOMContentLoaded)

@@ -570,7 +570,7 @@ Pages._renderApprovalsList = function(container) {
     Pages._renderOrganizeApprovals(container);
   });
 };
-_renderOrganizeApprovals(container) {
+Pages._renderOrganizeApprovals = function(container) {
   const allData = Pages._appData;
   const unassigned = allData.filter(b => !b.submission_round);
 
@@ -795,7 +795,7 @@ _renderOrganizeApprovals(container) {
     });
   }
 };
-_updateCombinedPrintBtn() {
+Pages._updateCombinedPrintBtn = function() {
   const checked = document.querySelectorAll('.batch-select-cb:checked');
   const btn = document.getElementById('btnPrintCombined');
   if (btn) {

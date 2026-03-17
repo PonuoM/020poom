@@ -245,11 +245,3 @@ Pages.showInspectionForm = function(itemId, causes) {
     }
   });
 };
-  // ── Reconditioning (ปรับสภาพ) — List + Detail ──────────────
-Pages._reconDocs = [];
-Pages._reconAllItems = [];
-Pages._reconPage = 1;
-Pages._reconPerPage = 50;
-Pages._reconSearch = '';
-  _reconViewMode: 'docs', // 'docs' or 'items'
-
