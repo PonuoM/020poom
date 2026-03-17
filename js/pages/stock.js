@@ -188,7 +188,7 @@ Pages.stock = async function(container) {
                     const color = statusColors[st] || '#999';
                     const label = statusLabels[st] || st;
                     const cls = item.class ? `<span class="badge badge-class">${item.class}</span>` : '-';
-                    const curWh = item.current_warehouse || '020';
+                    const curWh = '020';
                     const tgtWh = item.target_warehouse || '-';
                     return `<tr>
                       <td>${idx + 1}</td>
