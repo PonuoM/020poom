@@ -18,3 +18,8 @@ _agents/
 /tmp/
 *.tmp
 *.bak
+
+# Data files
+*.xlsm
+*.xlsx
+*.csv
