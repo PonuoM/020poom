@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "excel-mcp": {
+      "source": "sbroenne/mcp-server-excel",
+      "sourceType": "github",
+      "computedHash": "5d6c57d223eb7fad17c152711f3bc05dd8916e93405816138c30bfde14867a53"
+    }
+  }
+}

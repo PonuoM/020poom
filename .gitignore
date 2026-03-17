@@ -1,0 +1,20 @@
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Agent artifacts
+.agent/
+.gemini/
+_agents/
+
+# Temp
+/tmp/
+*.tmp
+*.bak

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTVSystem - ระบบจัดการงานรับคืนสินค้า</title>
+  <meta name="description" content="ระบบจัดการงานรับคืนและปรับสภาพสินค้า — ติดตามสถานะแบบ Real-time">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260317-17">
+  <link rel="stylesheet" href="css/tutorial.css?v=20260316-2">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@2/dist/lottie-player.js"></script>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <div class="login-logo">
+        <lottie-player src="assets/sweet-run-cycle.json" background="transparent" speed="1" loop autoplay style="width:64px;height:64px"></lottie-player>
+      </div>
+      <h1 class="login-title">ReconSystem</h1>
+      <p class="login-subtitle">ระบบจัดการงานปรับสภาพสินค้า</p>
+      <form id="loginForm" class="login-form">
+        <div class="login-field">
+          <label>ชื่อผู้ใช้</label>
+          <input type="text" id="loginUsername" placeholder="username" autocomplete="username" required>
+        </div>
+        <div class="login-field">
+          <label>รหัสผ่าน</label>
+          <input type="password" id="loginPassword" placeholder="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary login-btn" id="loginBtn">เข้าสู่ระบบ</button>
+        <div class="login-error" id="loginError"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- App Container (hidden until logged in) -->
+  <div id="appContainer" style="display:none">
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <lottie-player
+            src="assets/sweet-run-cycle.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+            style="width:44px;height:44px"
+          ></lottie-player>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RTVSystem</span>
+          <span class="logo-subtitle">งานรับคืน</span>
+        </div>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <!-- Dashboard -->
+      <a href="#dashboard" class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <!-- รับคืนสินค้า -->
+      <a href="#returns" class="nav-item" data-page="returns">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L20.2 3.8"/><path d="M21 16v5h-5M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+        <span>รับคืนสินค้า</span>
+      </a>
+
+      <!-- GROUP: งานปรับสภาพ -->
+      <div class="nav-group" data-group="recon">
+        <div class="nav-group-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          <span>งานปรับสภาพ</span>
+          <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="nav-group-items">
+          <a href="#reconditioning" class="nav-item nav-sub-item" data-page="reconditioning">
+            <span>ปรับสภาพ</span>
+          </a>
+          <a href="#masterRecon" class="nav-item nav-sub-item" data-page="masterRecon">
+            <span>รายการรวม</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- GROUP: งานขออนุมัติ -->
+      <div class="nav-group" data-group="approval">
+        <div class="nav-group-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>งานขออนุมัติ</span>
+          <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="nav-group-items">
+          <a href="#approvals" class="nav-item nav-sub-item" data-page="approvals">
+            <span>รอขออนุมัติ</span>
+          </a>
+          <a href="#approval-rounds" class="nav-item nav-sub-item" data-page="approval-rounds">
+            <span>เอกสารขออนุมัติ</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- GROUP: โอนไปคลังต่างๆ -->
+      <div class="nav-group" data-group="transfers">
+        <div class="nav-group-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+          <span>โอนไปคลังต่างๆ</span>
+          <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="nav-group-items">
+          <a href="#transfers" class="nav-item nav-sub-item" data-page="transfers">
+            <span>รอโอน</span>
+          </a>
+          <a href="#transfers-done" class="nav-item nav-sub-item" data-page="transfers-done">
+            <span>โอนแล้ว</span>
+          </a>
+        </div>
+      </div>
+      <!-- สินค้า -->
+      <a href="#products" class="nav-item" data-page="products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        <span>สินค้า</span>
+      </a>
+      <!-- ตั้งค่า -->
+      <a href="#settings" class="nav-item" data-page="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>ตั้งค่า</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+
+      <div class="user-info" id="userInfo">
+        <div class="user-avatar" id="userAvatar">A</div>
+        <div class="user-meta">
+          <div class="user-display-name" id="userDisplayName">—</div>
+          <button class="btn-logout" id="btnLogout" title="ออกจากระบบ">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            ออก
+          </button>
+        </div>
+      </div>
+      <div class="sidebar-footer-text">V1.1 งานรับคืน By ธนู สุริวงศ์</div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="date-display" id="dateDisplay"></div>
+      </div>
+    </header>
+
+    <!-- Page Container -->
+    <div class="page-container" id="pageContainer">
+      <!-- Pages will be rendered here by JS -->
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalFooter"></div>
+    </div>
+  </div>
+
+  <!-- Custom Confirm Dialog -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-dialog">
+      <div class="confirm-dialog-body">
+        <div class="confirm-icon" id="confirmIcon"></div>
+        <h3 class="confirm-title" id="confirmTitle"></h3>
+        <p class="confirm-message" id="confirmMessage"></p>
+      </div>
+      <div class="confirm-dialog-footer">
+        <button class="btn confirm-btn-cancel" id="confirmCancel">ยกเลิก</button>
+        <button class="btn confirm-btn-ok" id="confirmOk">ยืนยัน</button>
+      </div>
+    </div>
+  </div>
+  </div><!-- /appContainer -->
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="js/app.js?v=20260317-17"></script>
+  <script src="js/tutorial.js?v=20260316-1"></script>
+</body>
+</html>
