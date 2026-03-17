@@ -35,7 +35,7 @@ if ($method === 'GET') {
       rr.warehouse AS receipt_warehouse,
       rr.document_number AS receipt_doc_number,
       COALESCE(NULLIF(rec.inspector_name,''), ins.inspector_name) AS inspector_name,
-      ins.inspection_date,
+      COALESCE(ins.inspection_date, DATE(ri.confirmed_at), DATE(rec.created_at)) AS inspection_date,
       COALESCE(NULLIF(rec.cause_text,''), ins.cause_text) AS cause_text,
       ins.extra_notes AS inspection_notes,
       ins.result AS inspection_result,
