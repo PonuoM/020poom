@@ -32,6 +32,7 @@ Pages.reports = async function(container) {
     { key: 'class',            label: 'Class',          level: 1, get: r => r.class || '-' },
     { key: 'serial_number',    label: 'SN',             level: 1, get: r => r.serial_number || '-' },
     { key: 'quantity',         label: 'จำนวน',          level: 1, get: r => r.quantity || 1 },
+    { key: 'sales_conditions', label: 'เงื่อนไขฝ่ายขาย', level: 1, get: r => r.sales_conditions || '-' },
     // Level 2: รอตรวจ — inspection
     { key: 'inspector_name',   label: 'ผู้ตรวจ',        level: 2, get: r => r.inspector_name || '-' },
     { key: 'inspection_date',  label: 'วันที่ตรวจ',     level: 2, get: r => r.inspection_date || '-' },

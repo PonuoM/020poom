@@ -25,6 +25,8 @@ if ($method === 'GET') {
       ri.quantity,
       ri.status AS item_status,
       ri.notes AS item_notes,
+      ri.sales_conditions,
+      ri.is_confirmed,
       ri.created_at AS item_created,
       rr.receipt_number,
       rr.return_date,
