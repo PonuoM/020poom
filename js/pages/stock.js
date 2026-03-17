@@ -145,25 +145,24 @@ Pages.stock = async function(container) {
         </div>
       </div>
 
-      <!-- Pill Bar -->
+      <!-- Pill Bar + Summary -->
       <div class="stock-pill-bar" id="stockPillBar">
         <div class="stock-pill-bar__all ${!currentStatus ? 'active' : ''}" data-status="">
           <span>ทั้งหมด</span>
           <span class="pill-count">${totalAll}</span>
         </div>
         ${pillsHtml}
-      </div>
-
-      <!-- Summary strip -->
-      <div class="stock-summary-strip">
-        <span>รวม <strong>${summary.total_items || 0}</strong> รายการ</span>
-        <span>จำนวน <strong>${summary.total_qty || 0}</strong> ชิ้น</span>
-        <span class="stock-wh-badge">🏭 คลัง 020</span>
         ${currentStatus ? `<button class="btn btn-sm" id="clearStatusFilter"
-          style="font-size:0.72rem;padding:3px 10px;border-radius:16px;background:${(statusMap[currentStatus]||{}).color || '#999'}20;
+          style="font-size:0.72rem;padding:3px 10px;border-radius:16px;margin-left:4px;
+                 background:${(statusMap[currentStatus]||{}).color || '#999'}20;
                  color:${(statusMap[currentStatus]||{}).color || '#999'};border:1px solid ${(statusMap[currentStatus]||{}).color || '#999'}40">
           ✕ ${(statusMap[currentStatus]||{}).label || currentStatus}
         </button>` : ''}
+        <div style="margin-left:auto;display:flex;align-items:center;gap:12px;font-size:0.75rem;color:var(--text-muted);white-space:nowrap;padding-right:4px">
+          <span>รวม <strong style="color:var(--text-primary)">${summary.total_items || 0}</strong> รายการ</span>
+          <span>จำนวน <strong style="color:var(--text-primary)">${summary.total_qty || 0}</strong> ชิ้น</span>
+          <span class="stock-wh-badge">🏭 คลัง 020</span>
+        </div>
       </div>
 
       <!-- Data table -->
