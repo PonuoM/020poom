@@ -175,19 +175,21 @@ Pages.stock = async function(container) {
                 <th>Class</th>
                 <th>SN</th>
                 <th>จำนวน</th>
+                <th>คลังปัจจุบัน</th>
                 <th>สถานะ</th>
                 <th>คลังปลายทาง</th>
               </tr>
             </thead>
             <tbody>
               ${allItems.length === 0
-                ? '<tr><td colspan="12" class="text-center" style="padding:40px;color:var(--text-muted)">ไม่พบรายการ</td></tr>'
+                ? '<tr><td colspan="13" class="text-center" style="padding:40px;color:var(--text-muted)">ไม่พบรายการ</td></tr>'
                 : allItems.map((item, idx) => {
                     const st = item.status || 'received';
                     const color = statusColors[st] || '#999';
                     const label = statusLabels[st] || st;
                     const cls = item.class ? `<span class="badge badge-class">${item.class}</span>` : '-';
-                    const wh = item.target_warehouse || '-';
+                    const curWh = item.current_warehouse || '020';
+                    const tgtWh = item.target_warehouse || '-';
                     return `<tr>
                       <td>${idx + 1}</td>
                       <td><strong>${item.receipt_number || '-'}</strong></td>
@@ -199,11 +201,14 @@ Pages.stock = async function(container) {
                       <td class="text-center">${cls}</td>
                       <td>${item.serial_number || '-'}</td>
                       <td class="text-center">${item.quantity}</td>
+                      <td><span style="display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;padding:2px 8px;border-radius:10px;background:#10b98120;color:#10b981;font-weight:600">
+                        🏭 ${curWh}
+                      </span></td>
                       <td><span style="display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;padding:2px 8px;border-radius:10px;background:${color}20;color:${color};font-weight:500">
                         <span style="width:6px;height:6px;border-radius:50%;background:${color}"></span>
                         ${label}
                       </span></td>
-                      <td>${wh !== '-' ? '<span style="color:var(--primary);font-weight:600">' + wh + '</span>' : '-'}</td>
+                      <td>${tgtWh !== '-' ? '<span style="color:var(--primary);font-weight:600">' + tgtWh + '</span>' : '-'}</td>
                     </tr>`;
                   }).join('')
               }

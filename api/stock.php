@@ -34,6 +34,7 @@ if ($method === 'GET') {
       rr.return_date,
       rr.branch_name,
       rr.return_type,
+      rr.warehouse AS current_warehouse,
       rec.id AS recon_id,
       rec.target_warehouse,
       rec.status AS recon_status,
