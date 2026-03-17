@@ -1,6 +1,8 @@
 /* ============================================
  Reconditioning list + glass modal
  ============================================ */
+Pages._reconAllItems = [];
+Pages._reconPerPage = 20;
 
 Pages.reconditioning = async function(container) {
   try {
@@ -378,5 +380,3 @@ Pages._reconRenderItemsTable = function(area, container) {
   area.querySelectorAll('#reconPagination .pg-btn').forEach(b=>b.addEventListener('click',()=>{Pages._reconPage=parseInt(b.dataset.pg);Pages._reconRenderTable(container);}));
   document.getElementById('reconPerPage')?.addEventListener('change',e=>{Pages._reconPerPage=parseInt(e.target.value);Pages._reconPage=1;Pages._reconRenderTable(container);});
 };
-  // ── Reconditioning Detail ──────────────────────
-
