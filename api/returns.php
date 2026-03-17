@@ -142,8 +142,17 @@ if ($method === 'PATCH') {
     $stmt->execute([$currentUser['id'], $receiptId]);
     $count = $stmt->rowCount();
 
+    // Also create inspection records for each confirmed item
+    $stmtInsp = $pdo->prepare("
+      INSERT INTO inspections (item_id, inspector_name, inspection_date, cause_ids, cause_text, extra_notes, result)
+      SELECT ?, ?, CURDATE(), '[]', '', '', 'confirmed'
+      FROM dual WHERE NOT EXISTS (SELECT 1 FROM inspections WHERE item_id = ?)
+    ");
     foreach ($ids as $itemId) {
       log_edit($pdo, 'return_items', (int)$itemId, 'is_confirmed', '0', '1');
+      try {
+        $stmtInsp->execute([(int)$itemId, $currentUser['display_name'], (int)$itemId]);
+      } catch (Throwable $e) { /* skip if already exists */ }
     }
 
     json_response(['success' => true, 'confirmed' => $count, 'message' => "ยืนยันทั้งหมด {$count} รายการ"]);
@@ -259,6 +268,11 @@ if ($method === 'PATCH') {
     // 3) Confirm items
     if (!empty($payload['confirm_items']) && is_array($payload['confirm_items'])) {
       $stmtConfirm = $pdo->prepare("UPDATE return_items SET is_confirmed = 1, confirmed_by = ?, confirmed_at = NOW() WHERE id = ? AND is_confirmed = 0");
+      $stmtInsp = $pdo->prepare("
+        INSERT INTO inspections (item_id, inspector_name, inspection_date, cause_ids, cause_text, extra_notes, result)
+        SELECT ?, ?, CURDATE(), '[]', '', '', 'confirmed'
+        FROM dual WHERE NOT EXISTS (SELECT 1 FROM inspections WHERE item_id = ?)
+      ");
       $cnt = 0;
 
       foreach ($payload['confirm_items'] as $itemId) {
@@ -267,6 +281,9 @@ if ($method === 'PATCH') {
           if ($stmtConfirm->rowCount() > 0) {
             $cnt++;
             log_edit($pdo, 'return_items', (int)$itemId, 'is_confirmed', '0', '1');
+            try {
+              $stmtInsp->execute([(int)$itemId, $currentUser['display_name'], (int)$itemId]);
+            } catch (Throwable $e) { /* skip if already exists */ }
           }
         } catch (Throwable $e) { /* skip */ }
       }
