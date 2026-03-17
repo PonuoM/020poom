@@ -181,6 +181,7 @@ const App = {
       'approval-rounds': 'เอกสารขออนุมัติ',
       transfers: 'รอโอน',
       'transfers-done': 'โอนแล้ว',
+      stock: 'สต๊อคคงเหลือ',
       products: 'สินค้า',
       settings: 'ตั้งค่า'
     };
@@ -251,6 +252,7 @@ const App = {
         case 'masterRecon':    await Pages.masterRecon(container); break;
         case 'transfers':      await Pages.transfersPending(container); break;
         case 'transfers-done': await Pages.transfersDone(container); break;
+        case 'stock':          await Pages.stock(container); break;
         case 'products':       await Pages.products(container); break;
         case 'settings':       await Pages.settings(container); break;
         default:
