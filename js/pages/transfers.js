@@ -61,7 +61,7 @@ Pages.transfersPending = async function(container) {
             <h3 style="margin:0;font-size:0.95rem;color:#f59e0b">⏳ รอโอน (${allItems.length} รายการ)</h3>
           </div>
           <div class="table-wrapper" style="overflow-y:auto">
-            <table class="data-table">
+            <table class="data-table" style="font-size:0.72rem">
               <thead>
                 <tr>
                   <th style="width:36px"><input type="checkbox" id="cbTransferAll" style="width:16px;height:16px;cursor:pointer"></th>
@@ -88,17 +88,17 @@ Pages.transfersPending = async function(container) {
                     <td style="text-align:center"><input type="checkbox" class="transfer-cb" data-recon-id="${it.recon_id}" style="width:16px;height:16px;cursor:pointer"></td>
                     <td>${i+1}</td>
                     <td><span class="cell-badge">${App.escapeHTML(it.receipt_number||'-')}</span></td>
-                    <td style="font-size:0.78rem">${App.escapeHTML(it.return_type||'-')}</td>
-                    <td style="font-size:0.78rem">${App.escapeHTML(it.branch_name||'-')}</td>
+                    <td>${App.escapeHTML(it.return_type||'-')}</td>
+                    <td>${App.escapeHTML(it.branch_name||'-')}</td>
                     <td><span class="cell-badge">${App.escapeHTML(it.good_code||'-')}</span></td>
-                    <td style="font-size:0.82rem">${App.escapeHTML(it.good_name||'-')}</td>
+                    <td>${App.escapeHTML(it.good_name||'-')}</td>
                     <td style="text-align:center">${it.class ? '<span class="badge badge-class">'+App.escapeHTML(it.class)+'</span>' : '-'}</td>
-                    <td style="font-size:0.78rem">${App.escapeHTML(it.serial_number||'-')}</td>
+                    <td>${App.escapeHTML(it.serial_number||'-')}</td>
                     <td style="text-align:center">${parseInt(it.quantity)||1}</td>
-                    <td><span style="background:rgba(245,158,11,0.12);color:#f59e0b;padding:2px 8px;border-radius:8px;font-size:0.78rem;font-weight:500">${App.escapeHTML(it.target_warehouse||'')} ${App.escapeHTML(it.warehouse_name||'')}</span></td>
+                    <td><span style="background:rgba(245,158,11,0.12);color:#f59e0b;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:500">${App.escapeHTML(it.target_warehouse||'')} ${App.escapeHTML(it.warehouse_name||'')}</span></td>
                     <td>${it.recon_doc_number ? '<a href="#reconditioning/'+it.recon_doc_id+'" class="cell-badge" style="cursor:pointer;color:var(--primary);text-decoration:underline" title="ดูรายละเอียดเอกสารปรับสภาพ">'+App.escapeHTML(it.recon_doc_number)+'</a>' : '<span style="color:var(--text-muted)">-</span>'}</td>
                     <td>${it.batch_number ? '<a href="#approvals/'+it.batch_id+'" class="cell-badge" style="cursor:pointer;color:#10b981;text-decoration:underline" title="ดูรายละเอียดชุดอนุมัติ">'+App.escapeHTML(it.batch_number)+'</a>' : '<span style="color:var(--text-muted)">-</span>'}</td>
-                    <td style="font-size:0.75rem">${App.escapeHTML(it.cause_text||'-')}</td>
+                    <td>${App.escapeHTML(it.cause_text||'-')}</td>
                   </tr>
                 `).join('')}
               </tbody>
@@ -202,7 +202,7 @@ Pages.transfersDone = async function(container) {
             <h3 style="margin:0;font-size:0.95rem;color:#10b981">✅ โอนแล้ว (${filtered.length} รายการ)</h3>
           </div>
           <div class="table-wrapper" style="overflow-y:auto">
-            <table class="data-table">
+            <table class="data-table" style="font-size:0.72rem">
               <thead>
                 <tr>
                   <th>#</th>
@@ -227,16 +227,16 @@ Pages.transfersDone = async function(container) {
                   <tr>
                     <td>${i+1}</td>
                     <td><span class="cell-badge">${App.escapeHTML(it.receipt_number||'-')}</span></td>
-                    <td style="font-size:0.78rem">${App.escapeHTML(it.return_type||'-')}</td>
-                    <td style="font-size:0.78rem">${App.escapeHTML(it.branch_name||'-')}</td>
+                    <td>${App.escapeHTML(it.return_type||'-')}</td>
+                    <td>${App.escapeHTML(it.branch_name||'-')}</td>
                     <td><span class="cell-badge">${App.escapeHTML(it.good_code||'-')}</span></td>
-                    <td style="font-size:0.82rem">${App.escapeHTML(it.good_name||'-')}</td>
+                    <td>${App.escapeHTML(it.good_name||'-')}</td>
                     <td style="text-align:center">${it.class ? '<span class="badge badge-class">'+App.escapeHTML(it.class)+'</span>' : '-'}</td>
-                    <td style="font-size:0.78rem">${App.escapeHTML(it.serial_number||'-')}</td>
+                    <td>${App.escapeHTML(it.serial_number||'-')}</td>
                     <td style="text-align:center">${parseInt(it.quantity)||1}</td>
-                    <td><span style="background:rgba(16,185,129,0.12);color:#10b981;padding:2px 8px;border-radius:8px;font-size:0.78rem;font-weight:500">${App.escapeHTML(it.target_warehouse||'')} ${App.escapeHTML(it.warehouse_name||'')}</span></td>
+                    <td><span style="background:rgba(16,185,129,0.12);color:#10b981;padding:2px 8px;border-radius:8px;font-size:0.7rem;font-weight:500">${App.escapeHTML(it.target_warehouse||'')} ${App.escapeHTML(it.warehouse_name||'')}</span></td>
                     <td>${it.recon_doc_number ? '<a href="#reconditioning/'+it.recon_doc_id+'" class="cell-badge" style="cursor:pointer;color:var(--primary);text-decoration:underline">'+App.escapeHTML(it.recon_doc_number)+'</a>' : '-'}</td>
-                    <td style="font-size:0.8rem;color:var(--text-muted)">${fmtDate(it.transferred_date)}</td>
+                    <td style="color:var(--text-muted)">${fmtDate(it.transferred_date)}</td>
                     <td><button class="btn btn-outline btn-sm undo-transfer" data-recon-id="${it.recon_id}" style="font-size:0.7rem;padding:2px 8px;white-space:nowrap">↩ ยกเลิก</button></td>
                   </tr>
                 `).join('')}
